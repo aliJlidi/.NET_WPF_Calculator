@@ -31,6 +31,7 @@ namespace Calculator
             negativeButton.Click += NegativeButton_Click;
             percentageButton.Click += PercentageButton_Click;
             equalButton.Click += EqualButton_Click;
+            
         }
 
         private void EqualButton_Click(object sender, RoutedEventArgs e)
@@ -102,13 +103,13 @@ namespace Calculator
             resultLabel.Content = $"{resultLabel.Content}.";
         }
 
-        private void OperationButton_Click(object sender, RoutedEvent e)
+        private void OperationButton_Click(object sender, RoutedEventArgs e)
         {
            
 
                 if (double.TryParse(resultLabel.Content.ToString(), out lastNumber))
                 {
-                    resultLabel.Content = "0";
+                    resultLabel.Content = "";
                 }
 
             if (sender == multiplyButton) selectedOperator = SelectedOperator.Multiplication;
@@ -143,6 +144,11 @@ namespace Calculator
         }
         public static double Div(double n1, double n2)
         {
+            if (n2 == 0)
+            {
+                MessageBox.Show("you can not use zero in the demonumerator", "Wrong Operation !", MessageBoxButton.OK,MessageBoxImage.Error);
+                return 0;
+            }
             return n1 / n2;
         }
     }
